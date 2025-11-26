@@ -866,7 +866,7 @@ const App = {
             let html = `<h3 class="text-xl font-bold mb-4">${token.toUpperCase()} - Análise Técnica Completa</h3>`;
             
             // Momentum
-            html += `<div class="mb-4"><h4 class="font-semibold text-purple-400">�� Momentum</h4><p>`;
+            html += `<div class="mb-4"><h4 class="font-semibold text-purple-400"><i class="fas fa-chart-line"></i> Momentum</h4><p>`;
             if (rsi) {
                 if (rsi > 70) html += `RSI em ${rsi.toFixed(1)} indica <strong class="text-red-400">sobrecompra</strong>. `;
                 else if (rsi < 30) html += `RSI em ${rsi.toFixed(1)} indica <strong class="text-green-400">sobrevenda</strong>. `;
@@ -880,7 +880,7 @@ const App = {
             html += `</p></div>`;
             
             // Trend
-            html += `<div class="mb-4"><h4 class="font-semibold text-blue-400">📈 Tendência</h4><p>`;
+            html += `<div class="mb-4"><h4 class="font-semibold text-blue-400"><i class="fas fa-chart-area"></i> Tendência</h4><p>`;
             if (adx && adx.adx > 25) {
                 html += `ADX em ${adx.adx.toFixed(1)} confirma <strong>tendência forte</strong>. `;
                 if (adx.plusDI > adx.minusDI) html += `DI+ > DI- indica direção <strong class="text-green-400">altista</strong>.`;
@@ -891,7 +891,7 @@ const App = {
             html += `</p></div>`;
             
             // Wyckoff
-            html += `<div class="mb-4"><h4 class="font-semibold text-yellow-400">🎯 Análise Wyckoff</h4><p>`;
+            html += `<div class="mb-4"><h4 class="font-semibold text-yellow-400"><i class="fas fa-bullseye"></i> Análise Wyckoff</h4><p>`;
             html += `Fase identificada: <strong>${wyckoff.phase}</strong>. ${wyckoff.description} `;
             if (wyckoff.signals.length > 0) {
                 html += `Sinais detectados: <strong class="text-purple-400">${wyckoff.signals.join(', ')}</strong>.`;
@@ -899,7 +899,7 @@ const App = {
             html += `</p></div>`;
             
             // Fibonacci
-            html += `<div class="mb-4"><h4 class="font-semibold text-orange-400">📐 Fibonacci</h4><p>`;
+            html += `<div class="mb-4"><h4 class="font-semibold text-orange-400"><i class="fas fa-ruler-combined"></i> Fibonacci</h4><p>`;
             html += `Status: <strong>${fib.status}</strong>. `;
             if (fib.nearest) {
                 html += `Nível mais próximo: <strong>${fib.nearest.label}</strong> em $${fib.nearest.price.toFixed(4)}.`;
@@ -907,7 +907,7 @@ const App = {
             html += `</p></div>`;
             
             // Risk
-            html += `<div class="mb-4"><h4 class="font-semibold text-red-400">⚠️ Risco</h4><p>`;
+            html += `<div class="mb-4"><h4 class="font-semibold text-red-400"><i class="fas fa-exclamation-triangle"></i> Risco</h4><p>`;
             if (divergence) {
                 html += `<strong class="text-orange-400">ALERTA:</strong> Divergência ${divergence} detectada entre preço e RSI. `;
             }
@@ -920,7 +920,7 @@ const App = {
             
             // Conclusion
             const score = App.Rankings.getTechnicalScore(token);
-            html += `<div class="mt-6 p-4 bg-purple-900 bg-opacity-30 rounded-lg"><h4 class="font-semibold mb-2">✅ Conclusão</h4><p>`;
+            html += `<div class="mt-6 p-4 bg-purple-900 bg-opacity-30 rounded-lg"><h4 class="font-semibold mb-2"><i class="fas fa-check-circle"></i> Conclusão</h4><p>`;
             html += `Score técnico: <strong class="text-2xl">${score}/100</strong>. `;
             if (score > 70) html += `Perspectiva <strong class="text-green-400">POSITIVA</strong>. Boa oportunidade para posições long.`;
             else if (score < 40) html += `Perspectiva <strong class="text-red-400">NEGATIVA</strong>. Considere cautela ou short.`;
@@ -1302,10 +1302,10 @@ const App = {
         
         toCSV() {
             const rankings = App.Rankings.getAllRankings();
-            let csv = 'Token,Price,Change 24h %,Volume 24h,Technical Score,Wyckoff Score,Fibonacci Score\\n';
+            let csv = 'Token,Price,Change 24h %,Volume 24h,Technical Score,Wyckoff Score,Fibonacci Score\n';
             
             rankings.forEach(r => {
-                csv += `${r.token.toUpperCase()},${r.price},${r.change24h},${r.volume24h},${r.technicalScore},${r.wyckoffScore},${r.fibScore}\\n`;
+                csv += `${r.token.toUpperCase()},${r.price},${r.change24h},${r.volume24h},${r.technicalScore},${r.wyckoffScore},${r.fibScore}\n`;
             });
             
             const blob = new Blob([csv], { type: 'text/csv' });
